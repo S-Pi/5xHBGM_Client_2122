@@ -1,0 +1,24 @@
+<table class="table">
+    <tr>
+        <th>PatientenId</th>
+        <th>Name</th>
+        <th>Identifier</th>
+        <th></th>
+    </tr>
+    <tr *ngFor='let patient of patientArr$' (click)="selectPatient(patient)">
+        <td>{{patient.id}}</td>
+        <td>
+            <p *ngFor='let name$ of patient?.name'>{{name$?.text}}</p>
+        </td>
+        <td>
+            <p *ngFor='let identifier of 
+patient.identifier'>{{identifier?.value}}</p>
+        </td>
+    </tr>
+
+</table>
+<button (click)="createPatient()" type="button" class="btn btn-success">Neuen Patienten analegen</button>
+
+<div *ngIf="(selectedPatient.id != '')">
+    <app-patient [id]="selectedPatient.id" (patientModified)="onPatientModified($event)"></app-patient>
+</div>

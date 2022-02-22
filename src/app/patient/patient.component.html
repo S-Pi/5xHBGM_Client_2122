@@ -1,0 +1,78 @@
+<hr>
+<h2>Patient {{patient?.id}}</h2>
+<form [formGroup]="patientForm" (ngSubmit)="onSubmitUpdate()">
+  <ul class="list-group">
+    <li class="list-group-item">
+      ID: {{patient?.id}}
+    </li>
+    <li class="list-group-item">
+      <label>
+        Active:
+        <input type="checkbox" formControlName="active">
+      </label>
+
+    </li>
+    <li class="list-group-item">
+      <label>
+        Gender:
+        <select class="selectpicker" formControlName="gender">
+          <option>male</option>
+          <option>female</option>
+          <option>other</option>
+          <option>unknown</option>
+        </select>
+      </label>
+
+    </li>
+    <li class="list-group-item">
+      <label>
+        Birth date:
+        <input formControlName="birthDate" type="date">
+      </label>
+    </li>
+
+    <li class="list-group-item">
+      <label>
+        Deceased
+        <input type="checkbox" formControlName="deceasedBoolean">
+      </label>
+    </li>
+
+    <li class="list-group-item">
+      <div formArrayName ="name">
+        <h3>Names</h3>
+        <button (click)="addName()" type="button" class="btn btn-success">Neuen Namen anlegen</button>
+        
+        <div *ngFor="let name of namesArray.controls; let i=index">
+          <div [formGroupName]="i">        
+            <label>
+              Use:
+              <select class="selectpicker" formControlName="use">
+                  <option>usual</option>
+                  <option>official</option>
+                  <option>temp</option>
+                  <option>nickname</option>
+                  <option>anonymous</option>
+                  <option>old</option>
+                  <option>maiden</option>
+                </select>
+            </label>
+            <label>
+              Text:
+              <input formControlName="text" type="text">
+            </label>
+            <label>
+              Label:
+              <input formControlName="family" type="text">
+            </label>
+          </div>    
+        </div>
+      </div>
+    </li> 
+
+  </ul>
+  <div>
+    <button (click)="deletePatient()" type="button" class="btn btn-danger">Patienten löschen</button>
+    <button (click)="onSubmitUpdate()" type="button" class="btn btn-warning">Änderungen speichern</button>
+  </div>
+</form>
